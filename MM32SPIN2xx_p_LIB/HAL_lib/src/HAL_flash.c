@@ -116,6 +116,7 @@ static void delay(void)
     __IO uint32_t i = 0;
     for(i = 0xFF; i != 0; i--)
     {
+		__NOP();
     }
 }
 

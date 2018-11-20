@@ -99,7 +99,7 @@ uint32_t CRC_CalcCRC(uint32_t Data)
 	int i =  2;
 	
     CRC->DR = Data;
-	while(i--);
+	while(i--) __NOP();
     return (CRC->DR);
 }
 

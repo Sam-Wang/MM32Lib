@@ -402,6 +402,24 @@ uint32_t TIM_GetCounter(TIM_TypeDef* TIMx)
 }
 
 /**
+* @brief  Gets the TIMx Reload value.
+* @param  TIMx: where x can be 1, 2, 3, 6, 7, 14, 15, 16 and 17 to select the TIM
+*         peripheral.
+
+
+
+* @retval Auto Reload Register value.
+*/
+uint32_t TIM_GetAutoReload(TIM_TypeDef* TIMx)
+{
+	/* Check the parameters */
+	assert_param(IS_TIM_ALL_PERIPH(TIMx));
+
+	/* Get the Auto Reload Register value */
+	return TIMx->ARR;
+}
+
+/**
 * @brief  Gets the TIMx Prescaler value.
 * @param  TIMx: where x can be 1, 2, 3, 6, 7, 14, 15, 16 and 17 to select the TIM 
 *         peripheral.
@@ -683,6 +701,30 @@ void TIM_CtrlPWMOutputs(TIM_TypeDef* TIMx, FunctionalState NewState)
         /* Disable the TIM Main Output */
         TIMx->BDTR &= (uint16_t)(~((uint16_t)TIM_BDTR_MOE));
     }  
+}
+
+/**
+* @brief  Enables or disables the TIM BreakIn function.
+* @param  TIMx: where x can be 1, 8, 15, 16 or 17 to select the TIMx peripheral.
+* @param  NewState: new state of the TIM BreakIn function.
+*          This parameter can be: ENABLE or DISABLE.
+* @retval None
+*/
+void TIM_CtrlBreakIn(TIM_TypeDef* TIMx, FunctionalState NewState)
+{
+	/* Check the parameters */
+	assert_param(IS_TIM_LIST14_PERIPH(TIMx));
+	assert_param(IS_FUNCTIONAL_STATE(NewState));
+	if (NewState != DISABLE)
+	{
+		/* Enable the TIM BreakIn */
+		TIMx->BDTR |= TIM_BDTR_BKE;
+	}
+	else
+	{
+		/* Disable the TIM BreakIn */
+		TIMx->BDTR &= (uint16_t)(~((uint16_t)TIM_BDTR_BKE));
+	}
 }
 
 /**
@@ -2517,6 +2559,7 @@ void TIM_SetIC4Prescaler(TIM_TypeDef* TIMx, uint16_t TIM_ICPSC)
 *            @arg TIM_IT_COM: TIM Commutation Interrupt source
 *            @arg TIM_IT_Trigger: TIM Trigger Interrupt source
 *            @arg TIM_IT_Break: TIM Break Interrupt source
+*            @arg TIM_IT_DMA: TIM DMA Interrupt source
 * 
 * @note   TIM6 and TIM7 can only generate an update interrupt.
 * @note   TIM15 can have only TIM_IT_Update, TIM_IT_CC1,TIM_IT_CC2 or TIM_IT_Trigger. 

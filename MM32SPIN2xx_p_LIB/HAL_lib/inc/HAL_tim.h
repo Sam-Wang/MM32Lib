@@ -551,19 +551,21 @@ connected to IC2, IC1, IC4 or IC3, respectively. */
 #define TIM_IT_COM                         ((uint16_t)0x0020)
 #define TIM_IT_Trigger                     ((uint16_t)0x0040)
 #define TIM_IT_Break                       ((uint16_t)0x0080)
+#define TIM_IT_DMA                         ((uint32_t)0x00004000)
 #define TIM_IT_CC5                         ((uint32_t)0x00010000)
 
 #define IS_TIM_IT(IT) ((((IT) & (uint32_t)0xFF00) == 0x0000) && ((IT) != 0x0000))
 
 #define IS_TIM_GET_IT(IT) (((IT) == TIM_IT_Update) || \
-((IT) == TIM_IT_CC1) || \
-    ((IT) == TIM_IT_CC2) || \
-        ((IT) == TIM_IT_CC3) || \
-            ((IT) == TIM_IT_CC4) || \
-                ((IT) == TIM_IT_COM) || \
-                    ((IT) == TIM_IT_Trigger) || \
-                        ((IT) == TIM_IT_Break) || \
-							((IT) == TIM_IT_CC5))
+									((IT) == TIM_IT_CC1) || \
+    								((IT) == TIM_IT_CC2) || \
+									((IT) == TIM_IT_CC3) || \
+									((IT) == TIM_IT_CC4) || \
+									((IT) == TIM_IT_COM) || \
+									((IT) == TIM_IT_Trigger) || \
+									((IT) == TIM_IT_Break) || \
+									((IT) == TIM_IT_DMA) || \
+									((IT) == TIM_IT_CC5))
 /**
 * @}
 */ 
